@@ -348,6 +348,6 @@ Flux 劣势：
 （image via [devjournal](http://devjournal.ru/wp-content/uploads/2016/03/React.js-Flux-Redux.png)、[facebook](https://facebook.github.io/flux/)、[scotch.io](https://cask.scotch.io/2014/10/V70cSEC.png)）
 
 ## :door: 任意门
-| [回首页](https://github.com/blueflylin/reactjs101) | [上一章：ImmutableJS 入门教学](https://github.com/blueflylin/reactjs101/blob/master/Ch06/react-immutable-introduction.md) | [下一章：Redux 基础概念](https://github.com/blueflylin/reactjs101/blob/master/Ch07/react-redux-introduction.md) |
+| [回首页](https://github.com/aclk/reactjs101) | [上一章：ImmutableJS 入门教学](https://github.com/aclk/reactjs101/blob/master/Ch06/react-immutable-introduction.md) | [下一章：Redux 基础概念](https://github.com/aclk/reactjs101/blob/master/Ch07/react-redux-introduction.md) |
 
-| [纠错、提问或想法](https://github.com/blueflylin/reactjs101/issues) |
+| [纠错、提问或想法](https://github.com/aclk/reactjs101/issues) |

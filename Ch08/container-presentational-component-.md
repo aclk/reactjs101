@@ -150,6 +150,6 @@ That's it！通过区分 Container 与 Presentational Components 可以让程序
 4. [React higher order components](http://www.darul.io/post/2016-01-05_react-higher-order-components)
 
 ## :door: 任意门
-| [回首页](https://github.com/blueflylin/reactjs101) | [上一章：Redux 实战入门](https://github.com/blueflylin/reactjs101/blob/master/Ch07/react-redux-real-world-example.md) | [下一章：用 React + Router + Redux + ImmutableJS 写一个 Github 查询应用](https://github.com/blueflylin/reactjs101/blob/master/Ch09/react-router-redux-github-finder.md) |
+| [回首页](https://github.com/aclk/reactjs101) | [上一章：Redux 实战入门](https://github.com/aclk/reactjs101/blob/master/Ch07/react-redux-real-world-example.md) | [下一章：用 React + Router + Redux + ImmutableJS 写一个 Github 查询应用](https://github.com/aclk/reactjs101/blob/master/Ch09/react-router-redux-github-finder.md) |
 
-| [纠错、提问或想法](https://github.com/blueflylin/reactjs101/issues) |
+| [纠错、提问或想法](https://github.com/aclk/reactjs101/issues) |

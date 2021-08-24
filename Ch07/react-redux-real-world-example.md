@@ -355,6 +355,6 @@ export default TodoList;
 （image via [JonasOhlsson](http://www.slideshare.net/JonasOhlsson/using-redux)、[licdn](https://media.licdn.com/mpr/mpr/shrinknp_800_800/AAEAAQAAAAAAAAUQAAAAJDAyMWU1MmZhLTYzMTQtNDJkNy1hYzM4LTE5MWQzNWM1ODcyNA.png)）
 
 ## :door: 任意门
-| [回首页](https://github.com/blueflylin/reactjs101) | [上一章：Redux 基础概念](https://github.com/blueflylin/reactjs101/blob/master/Ch07/react-redux-real-world-example.md) | [下一章：Container 与 Presentational Components 入门](https://github.com/blueflylin/reactjs101/blob/master/Ch08/container-presentational-component-.md) |
+| [回首页](https://github.com/aclk/reactjs101) | [上一章：Redux 基础概念](https://github.com/aclk/reactjs101/blob/master/Ch07/react-redux-real-world-example.md) | [下一章：Container 与 Presentational Components 入门](https://github.com/aclk/reactjs101/blob/master/Ch08/container-presentational-component-.md) |
 
-| [纠错、提问或想法](https://github.com/blueflylin/reactjs101/issues) |
+| [纠错、提问或想法](https://github.com/aclk/reactjs101/issues) |

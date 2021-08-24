@@ -765,12 +765,12 @@ export default {
       } else {
         dispatch(hideSpinner());
         window.location.reload();
-        browserHistory.push('/'); 
+        browserHistory.push('/');
       }
     })
     .catch(function (error) {
-    });    
-  } 
+    });
+  }
 };
 ```
 
@@ -1052,7 +1052,7 @@ export default function requireAuthentication(Component, type) {
           (type === 'auth') ?
           this.props.isAuthorized === true ? <Component {...this.props } /> : null
           : this.props.isAuthorized === false ? <Component {...this.props } /> : null
-        } 
+        }
         </div>
       )
     }
@@ -1427,7 +1427,7 @@ export default connect(
     return Object.assign({}, stateProps, dispatchProps, ownProps, {
       onRecipeSubmit: onRecipeSubmit(recipes, recipeId, name, description, imagePath, isEdit),
     });
-  }  
+  }
 )(ShareBox);
 
 
@@ -1504,6 +1504,6 @@ export default connect(
 MIT, Special thanks [Loading.io](http://loading.io/)
 
 ## :door: 任意门
-| [回首页](https://github.com/blueflylin/reactjs101) | [上一章：React Redux Sever Rendering（Isomorphic JavaScript）入门](https://github.com/blueflylin/reactjs101/blob/master/Ch10/react-redux-server-rendering-isomorphic-javascript.md) | [下一章：附录一、React ES5、ES6+ 常见用法对照表](https://github.com/blueflylin/reactjs101/tree/master/Appendix01) |
+| [回首页](https://github.com/aclk/reactjs101) | [上一章：React Redux Sever Rendering（Isomorphic JavaScript）入门](https://github.com/aclk/reactjs101/blob/master/Ch10/react-redux-server-rendering-isomorphic-javascript.md) | [下一章：附录一、React ES5、ES6+ 常见用法对照表](https://github.com/aclk/reactjs101/tree/master/Appendix01) |
 
-| [纠错、提问或想法](https://github.com/blueflylin/reactjs101/issues) |
+| [纠错、提问或想法](https://github.com/aclk/reactjs101/issues) |

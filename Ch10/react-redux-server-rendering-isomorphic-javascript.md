@@ -9,7 +9,7 @@
 
 >Isomorphic JavaScript
 Isomorphic JavaScript apps are JavaScript applications that can run both client-side and server-side.
-The backend and frontend share the same code. 
+The backend and frontend share the same code.
 
 Isomorphic JavaScript 系指浏览器端和服务器端共用 JavaScript 的代码。
 
@@ -123,7 +123,7 @@ ReactDOMServer.renderToString(<HelloButton name="Mark" />);
     filename: 'index.html',
     inject: 'body',
   });
-  
+
   // entry 为进入点，output 为进行完 eslint、babel loader 转译后的文件位置
   module.exports = {
     entry: [
@@ -160,7 +160,7 @@ ReactDOMServer.renderToString(<HelloButton name="Mark" />);
   };
   ```
 
-太好了！这样我们就完成了开发环境的设置可以开始动手实践 `React Server Side Rendering Counter` 应用程序了！  
+太好了！这样我们就完成了开发环境的设置可以开始动手实践 `React Server Side Rendering Counter` 应用程序了！
 
 先看一下我们整个项目的数据结构，我们把整个项目分成三个主要的文件夹（`client`、`server`，还有共用代码的 `common`）：
 
@@ -180,7 +180,7 @@ import CounterContainer from '../common/containers/CounterContainer';
 import configureStore from '../common/store/configureStore'
 import { fromJS } from 'immutable';
 
-// 从 server 取得传进来的 initialState。由于从字串转回对象，又称为 rehydration（覆水） 
+// 从 server 取得传进来的 initialState。由于从字串转回对象，又称为 rehydration（覆水）
 const initialState = window.__PRELOADED_STATE__;
 
 // 由于我们使用 ImmutableJS，所以需要把在 server-side dehydration（脱水）又在前端 rehydration（覆水）的 initialState 转成 ImmutableJS 数据型态，并传进 configureStore 创建 store
@@ -234,7 +234,7 @@ function handleRender(req, res) {
   // 读取 api 提供的数据（这边我们 api 是用 setTimeout 进行模仿异步状况），若网址参数有值择取值，若无则使用 api 提供的随机值，若都没有则取 0
     const params = qs.parse(req.query);
     const counter = parseInt(params.counter, 10) || apiResult || 0;
-    // 将 initialState 转成 immutable 和符合 state 设计的格式 
+    // 将 initialState 转成 immutable 和符合 state 设计的格式
     const initialState = fromJS({
       counterReducers: {
         count: counter,
@@ -274,7 +274,7 @@ function renderFullPage(html, preloadedState) {
     `
 }
 
-// 使用 middleware 于 webpack 去进行 hot module reloading 
+// 使用 middleware 于 webpack 去进行 hot module reloading
 const compiler = webpack(webpackConfig);
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }));
 app.use(webpackHotMiddleware(compiler));
@@ -307,8 +307,8 @@ export const decrementCount = createAction(DECREMENT_COUNT);
 以下为输出常数 `src/constants/actionTypes.js`：
 
 ```javascript
-export const INCREMENT_COUNT = 'INCREMENT_COUNT';  
-export const DECREMENT_COUNT = 'DECREMENT_COUNT';  
+export const INCREMENT_COUNT = 'INCREMENT_COUNT';
+export const DECREMENT_COUNT = 'DECREMENT_COUNT';
 ```
 
 在这个范例中我们使用 `setTimeout()` 来仿真异步的产生数据让 server 端在每次接收 request 时读取随机产生的值。事实上，我们会开 API 让 Server 读取初始要导入的 initialState。
@@ -460,6 +460,6 @@ export default connect(
 （image via [airbnb](http://nerds.airbnb.com/wp-content/uploads/2013/11/Screen-Shot-2013-11-06-at-5.21.00-PM.png)）
 
 ## :door: 任意门
-| [回首页](https://github.com/blueflylin/reactjs101) | [上一章：用 React + Router + Redux + ImmutableJS 写一个 Github 查找应用](https://github.com/blueflylin/reactjs101/blob/master/Ch09/react-router-redux-github-finder.md) | [下一章：用 React + Redux + Node（Isomorphic JavaScript）开发食谱分享网站](https://github.com/blueflylin/reactjs101/blob/master/Ch10/react-router-redux-node-isomorphic-javascript-open-cook.md) |
+| [回首页](https://github.com/aclk/reactjs101) | [上一章：用 React + Router + Redux + ImmutableJS 写一个 Github 查找应用](https://github.com/aclk/reactjs101/blob/master/Ch09/react-router-redux-github-finder.md) | [下一章：用 React + Redux + Node（Isomorphic JavaScript）开发食谱分享网站](https://github.com/aclk/reactjs101/blob/master/Ch10/react-router-redux-node-isomorphic-javascript-open-cook.md) |
 
-| [纠错、提问或想法](https://github.com/blueflylin/reactjs101/issues) |
+| [纠错、提问或想法](https://github.com/aclk/reactjs101/issues) |

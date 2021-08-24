@@ -3,11 +3,11 @@
 ![ImmutableJS](./images/immutable.png "ImmutableJS")
 
 ## 前言
-一般来说在 JavaScript 中有两种数据类型：Primitive（String、Number、Boolean、null、undefinded）和 Object（Reference）。在 JavaScript 中对象的操作比起 Java 容易很多，但也因为相对弹性不严谨，所以产生了一些问题。在 JavaScript 中的 Object（对象）数据是 Mutable（可以变的），由于是使用 Reference 的方式，所以当修改到复制的值也会修改到原始值。例如下面的 `map2` 值是指到 `map1`，所以当 `map1` 值一改，`map2` 的值也会受影响。 
+一般来说在 JavaScript 中有两种数据类型：Primitive（String、Number、Boolean、null、undefinded）和 Object（Reference）。在 JavaScript 中对象的操作比起 Java 容易很多，但也因为相对弹性不严谨，所以产生了一些问题。在 JavaScript 中的 Object（对象）数据是 Mutable（可以变的），由于是使用 Reference 的方式，所以当修改到复制的值也会修改到原始值。例如下面的 `map2` 值是指到 `map1`，所以当 `map1` 值一改，`map2` 的值也会受影响。
 
 ```javascript
-var map1 = { a: 1 }; 
-var map2 = map1; 
+var map1 = { a: 1 };
+var map2 = map1;
 map2.a = 2
 ```
 
@@ -15,7 +15,7 @@ map2.a = 2
 
 为了解决这个问题，在 2013 年时 Facebook 工程师 Lee Byron 打造了 [ImmutableJS](https://facebook.github.io/immutable-js/)，但并没有被预设放到 React 工具包中（虽然有提供简化的 Helper），但 `ImmutableJS` 的出现确实解决了 `React` 甚至 `Redux` 所遇到的一些问题。
 
-以下范例即是引入了 `ImmutableJS` 的效果，读者可以发现，虽然我们操作了 `map1` 的值，但会发现原本的 `map1` 并未受到影响（因为任何修改都不会影响到原始数据），虽然使用 `deepCopy` 也可以模拟类似的效果但会浪费过多的计算资源和内存，`ImmutableJS` 则可以容易地共享没有被修改到的数据（例如下面的数据 `b` 即为 `map1` 所 `map2` 共享），因而有更好的性能表现。 
+以下范例即是引入了 `ImmutableJS` 的效果，读者可以发现，虽然我们操作了 `map1` 的值，但会发现原本的 `map1` 并未受到影响（因为任何修改都不会影响到原始数据），虽然使用 `deepCopy` 也可以模拟类似的效果但会浪费过多的计算资源和内存，`ImmutableJS` 则可以容易地共享没有被修改到的数据（例如下面的数据 `b` 即为 `map1` 所 `map2` 共享），因而有更好的性能表现。
 
 ```javascript
 import Immutable from 'immutable';
@@ -34,7 +34,7 @@ ImmutableJS 提供了 7 种不可修改的数据类型：`List`、`Map`、`Stack
 
   ```javascript
   const Map= Immutable.Map;
-  
+
   // 1. Map 大小
   const map1 = Map({ a: 1 });
   map1.size
@@ -61,7 +61,7 @@ ImmutableJS 提供了 7 种不可修改的数据类型：`List`、`Map`、`Stack
   const map5 = map1.update('a', () => (7))
   // => Map { "a": 7 }
 
-  // 6. 合并 Map 
+  // 6. 合并 Map
   const map6 = Map({ b: 3 });
   map1.merge(map6);
   // => Map { "a": 1, "b": 3 }
@@ -114,7 +114,7 @@ ImmutableJS 提供了 7 种不可修改的数据类型：`List`、`Map`、`Stack
 
   // 2. 新增元素
   const set2 = set1.add(1).add(5);
-  // => Set { 1, 2, 3, 5 } 
+  // => Set { 1, 2, 3, 5 }
   // 由于 Set 为不能重复集合，故 1 只能出现一次
 
   // 3. 删除元素
@@ -185,7 +185,7 @@ ImmutableJS 提供了 7 种不可修改的数据类型：`List`、`Map`、`Stack
   Immutable.Range(1, Infinity)
   .map(n => -n)
   .take(2)
-  .reduce((r, n) => r + n, 0); 
+  .reduce((r, n) => r + n, 0);
   // -3
   ```
 
@@ -243,7 +243,7 @@ class FooComponent extends React.Component {
 ```
 
 ## 总结
-虽然 `ImmutableJS` 的引入可以带来许多好处和性能的提升但由于引入整体档案较大且较具侵入性，在引入之前可以自行评估看看是否合适于目前的专案。接下来我们将在后面的章节讲解如何将 `ImmutableJS` 和 `Redux` 整合应用到实务上的范例。 
+虽然 `ImmutableJS` 的引入可以带来许多好处和性能的提升但由于引入整体档案较大且较具侵入性，在引入之前可以自行评估看看是否合适于目前的专案。接下来我们将在后面的章节讲解如何将 `ImmutableJS` 和 `Redux` 整合应用到实务上的范例。
 
 ## 延伸阅读
 1. [官方网站](https://facebook.github.io/immutable-js/)
@@ -259,6 +259,6 @@ class FooComponent extends React.Component {
 （image via [risingstack](https://risingstack-blog.s3.amazonaws.com/2016/Jan/immutable_logo_for_react_js_best_practices-1453211749818.png)）
 
 ## :door: 任意门
-| [回首页](https://github.com/blueflylin/reactjs101) | [上一章：React Router 入门实战教学](https://github.com/blueflylin/reactjs101/blob/master/Ch05/react-router-introduction.md) | [下一章：Flux 基础概念与实战入门](https://github.com/blueflylin/reactjs101/blob/master/Ch07/react-flux-introduction.md) |
+| [回首页](https://github.com/aclk/reactjs101) | [上一章：React Router 入门实战教学](https://github.com/aclk/reactjs101/blob/master/Ch05/react-router-introduction.md) | [下一章：Flux 基础概念与实战入门](https://github.com/aclk/reactjs101/blob/master/Ch07/react-flux-introduction.md) |
 
-| [纠错、提问或想法](https://github.com/kdchang/reactjs101/issues) |
+| [纠错、提问或想法](https://github.com/aclk/reactjs101/issues) |

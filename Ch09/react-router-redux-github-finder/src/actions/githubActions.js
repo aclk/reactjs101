@@ -11,12 +11,7 @@ import {
   hideSpinner,
 } from './uiActions';
 
-<<<<<<< HEAD
-export const getGithub = (userId = 'torvalds') => {
-  console.log('github action');
-=======
-export const getGithub = (userId = 'torvalds') => (
->>>>>>> kdchang/master
+export const getGithub = (userId = 'torvalds') =>(
   (dispatch) => {
     dispatch({ type: GET_GITHUB_INITIATE });
     dispatch(showSpinner());

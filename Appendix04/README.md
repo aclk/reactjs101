@@ -64,124 +64,124 @@ GET `/users/3500401`
 在 GraphQL 中有取得数据 Query、更改数据 Mutation 等操作。以下我们先介绍如何建立 GraphQL Server 并取得数据。
 
 1. 环境配置
-	接下来我们将动手建立 GraphQL 的简单范例，让大家感受一下 GraphQL 的特性，在这之前我们需要先安装以下包并搭建好环境：
+    接下来我们将动手建立 GraphQL 的简单范例，让大家感受一下 GraphQL 的特性，在这之前我们需要先安装以下包并搭建好环境：
 
-	1. [graphql](https://github.com/graphql/graphql-js)：GraphQL 的 JavaScript 实践.
-	2. [express](https://github.com/expressjs/express)：Node web framework.
-	3. [express-graphql](https://github.com/graphql/express-graphql), an express middleware that exposes a GraphQL server.
+    1. [graphql](https://github.com/graphql/graphql-js)：GraphQL 的 JavaScript 实践.
+    2. [express](https://github.com/expressjs/express)：Node web framework.
+    3. [express-graphql](https://github.com/graphql/express-graphql), an express middleware that exposes a GraphQL server.
 
-	```
-	$ npm init
-	$ npm install graphql express express-graphql --save
-	```
+    ```
+    $ npm init
+    $ npm install graphql express express-graphql --save
+    ```
 
 2. Data 格式设计
 
-	以下是 `data.json`：
+    以下是 `data.json`：
 
-	```
-	{
-	  "1": {
-	    "id": "1",
-	    "name": "Dan"
-	  },
-	  "2": {
-	    "id": "2",
-	    "name": "Marie"
-	  },
-	  "3": {
-	    "id": "3",
-	    "name": "Jessie"
-	  }
-	}
-	```
+    ```
+    {
+      "1": {
+        "id": "1",
+        "name": "Dan"
+      },
+      "2": {
+        "id": "2",
+        "name": "Marie"
+      },
+      "3": {
+        "id": "3",
+        "name": "Jessie"
+      }
+    }
+    ```
 
 3. Server 设计
 
-	```javascript
-	// 引入函数库
-	import graphql from 'graphql';
-	import graphqlHTTP from 'express-graphql';
-	import express from 'express';
-	
-	// 引入 data
-	const data = require('./data.json');
+    ```javascript
+    // 引入函数库
+    import graphql from 'graphql';
+    import graphqlHTTP from 'express-graphql';
+    import express from 'express';
+    
+    // 引入 data
+    const data = require('./data.json');
 
-	// 定义 User type 的两个子 fields：`id` 和 `name` 字串，注意型别对于 GraphQL 非常重要
-	const userType = new graphql.GraphQLObjectType({
-	  name: 'User',
-	  fields: {
-	    id: { type: graphql.GraphQLString },
-	    name: { type: graphql.GraphQLString },
-	  }
-	});
+    // 定义 User type 的两个子 fields：`id` 和 `name` 字串，注意型别对于 GraphQL 非常重要
+    const userType = new graphql.GraphQLObjectType({
+      name: 'User',
+      fields: {
+        id: { type: graphql.GraphQLString },
+        name: { type: graphql.GraphQLString },
+      }
+    });
 
-	const schema = new graphql.GraphQLSchema({
-	  query: new graphql.GraphQLObjectType({
-	    name: 'Query',
-	    fields: {
-	      user: {
-	      	// 使用上面定义的 userType
-	        type: userType,
-	        // 定义所接受的 user 参数
-	        args: {
-	          id: { type: graphql.GraphQLString }
-	        },
-			// 当传入参数后 resolve 如何处理回传 data
-	        resolve: function (_, args) {
-	          return data[args.id];
-	        }
-	      }
-	    }
-	  })
-	});
+    const schema = new graphql.GraphQLSchema({
+      query: new graphql.GraphQLObjectType({
+        name: 'Query',
+        fields: {
+          user: {
+              // 使用上面定义的 userType
+            type: userType,
+            // 定义所接受的 user 参数
+            args: {
+              id: { type: graphql.GraphQLString }
+            },
+            // 当传入参数后 resolve 如何处理回传 data
+            resolve: function (_, args) {
+              return data[args.id];
+            }
+          }
+        }
+      })
+    });
 
-	// 启动 graphql server
-	express()
-	  .use('/graphql', graphqlHTTP({ schema: schema, pretty: true }))
-	  .listen(3000);
+    // 启动 graphql server
+    express()
+      .use('/graphql', graphqlHTTP({ schema: schema, pretty: true }))
+      .listen(3000);
 
-	console.log('GraphQL server running on http://localhost:3000/graphql');
-	```
+    console.log('GraphQL server running on http://localhost:3000/graphql');
+    ```
 
-	在终端机执行：
+    在终端机执行：
 
-	```
-	node index.js
-	```
+    ```
+    node index.js
+    ```
 
-	这个时候我们可以打开浏览器输入 ` localhost:3000/graphql.`，由于没有任何 Query，目前会出现以下画面：
+    这个时候我们可以打开浏览器输入 ` localhost:3000/graphql.`，由于没有任何 Query，目前会出现以下画面：
 
-	![Relay/GraphQL 初体验](./images/graphql-demo-1.png)
+    ![Relay/GraphQL 初体验](./images/graphql-demo-1.png)
 
 4. Query 设计
 
-	当 GraphQL 指令为：
+    当 GraphQL 指令为：
 
-	```javascript
-	{
-	  user(id: "1") {
-	    name
-	  }
-	}
-	```	
+    ```javascript
+    {
+      user(id: "1") {
+        name
+      }
+    }
+    ```    
 
-	将回传数据：
-	
-	```javascript
-	{
-	  "data": {
-	    "user": {
-	      "name": "Dan"
-	    }
-	  }
-	}
-	```
+    将回传数据：
+    
+    ```javascript
+    {
+      "data": {
+        "user": {
+          "name": "Dan"
+        }
+      }
+    }
+    ```
 
-	在了解了数据和 Query 设计后，这个时候我们可以打开浏览器输入（当然也可以通过终端机 curl 的方式执行）：
-	`http://localhost:3000/graphql?query={user(id:"1"){name}}`，此时 server 会根据 GET 的数据回传：
+    在了解了数据和 Query 设计后，这个时候我们可以打开浏览器输入（当然也可以通过终端机 curl 的方式执行）：
+    `http://localhost:3000/graphql?query={user(id:"1"){name}}`，此时 server 会根据 GET 的数据回传：
 
-	![Relay/GraphQL 初体验](./images/graphql-demo-2.png)
+    ![Relay/GraphQL 初体验](./images/graphql-demo-2.png)
 
 到这里，你已经完成了最简单的 GraphQL Server 设计了，若你遇到编码问题，可以尝试使用 JavaScript 中的 `encodeURI` 去进行转码。也可以自己尝试不同的 Schema 和 Query，感受一下 GraphQL 的特性。事实上，GraphQL 还拥有许多有趣的特色，例如：Fragment、指令、Promise 等，若读者对于 GraphQL 有兴趣可以进一步参考 [GraphQL 官网](http://graphql.org/)。
 
@@ -198,15 +198,15 @@ GET `/users/3500401`
 一般来说要使用 Relay 必须先准备好以下三项工具：
 
 1. A GraphQL Schema
-	- [graphql-js](https://github.com/graphql/graphql-js)
-	- [graphql-relay-js](https://github.com/graphql/graphql-relay-js)
+    - [graphql-js](https://github.com/graphql/graphql-js)
+    - [graphql-relay-js](https://github.com/graphql/graphql-relay-js)
 
 2. A GraphQL Server
-	- [express](https://github.com/expressjs/express)
-	- [express-graphql](https://github.com/graphql/express-graphql)
+    - [express](https://github.com/expressjs/express)
+    - [express-graphql](https://github.com/graphql/express-graphql)
 
 3. Relay
-	- [network layer](https://github.com/facebook/relay/tree/master/src/network-layer/default)：Relay 通过 network layer 传 GraphQL 给 server
+    - [network layer](https://github.com/facebook/relay/tree/master/src/network-layer/default)：Relay 通过 network layer 传 GraphQL 给 server
 
 接下来我们来通过 React 官方上的范例来让大家感受一下 Relay 的特性。上面我们有提过：在 Relay 中可以让每个 Component 通过 GraphQL 的整合处理可以更精确地向 Component props 提供取得的数据，并在 client side 存放一份所有数据的 store 当作暂存。所以，首先我们先建立每个 Component 和 GraphQL/Relay 的对应：
 
@@ -353,6 +353,6 @@ React 生态系中，除了前端 View 的部份有革新性的创新外，Graph
 （image via [facebook](https://facebook.github.io/react/img/blog/relay-components/relay-architecture.png)、[kadira](https://cldup.com/uhBzqnK002.png)）
 
 ## :door: 任意门
-| [回首页](https://github.com/blueflylin/reactjs101) | [上一章：附录三、React 测试入门教学](https://github.com/blueflylin/reactjs101/blob/master/Appendix03/README.md) | 
+| [回首页](https://github.com/aclk/reactjs101) | [上一章：附录三、React 测试入门教学](https://github.com/aclk/reactjs101/blob/master/Appendix03/README.md) | 
 
-| [纠正、提问或许愿](https://github.com/blueflylin/reactjs101/issues) |
+| [纠正、提问或许愿](https://github.com/aclk/reactjs101/issues) |

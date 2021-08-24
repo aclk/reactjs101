@@ -15,27 +15,27 @@
 
 1. 只使用一个 store 将整个应用程序的状态 (state) 用对象树 (object tree) 的方式储存起来：
 
-	原生的 Flux 会有许多分散的 store 储存各个不同的状态，但在 redux 中，只会有唯一一个 store 将所有的数据用对象的方式包起来。
+    原生的 Flux 会有许多分散的 store 储存各个不同的状态，但在 redux 中，只会有唯一一个 store 将所有的数据用对象的方式包起来。
 
-	```javascript
-	//原生 Flux 的 store
-	const userStore = {
-	    name: ''
-	}
-	const todoStore = {
-	    text: ''
-	}
+    ```javascript
+    //原生 Flux 的 store
+    const userStore = {
+        name: ''
+    }
+    const todoStore = {
+        text: ''
+    }
 
-	// Redux 的单一 store
-	const state = {
-	    userState: {
-	        name: ''
-	    },
-	    todoState: {
-	        text: ''
-	    }
-	}
-	```
+    // Redux 的单一 store
+    const state = {
+        userState: {
+            name: ''
+        },
+        todoState: {
+            text: ''
+        }
+    }
+    ```
 
 2. 唯一可以改变 state 的方法就是发送 action，这部份和 Flux 类似，但 Redux 并没有像 Flux 设计有 Dispatcher。Redux 的 action 和 Flux 的 action 都是一个包含 `type` 和 `payload` 的对象。
 
@@ -91,57 +91,57 @@ store.dispatch({ type: 'DECREMENT' });
 
 1. createStore：`createStore(reducer, [preloadedState], [enhancer])`
 
-	我们知道在 Redux 中只会有一个 store。在产生 store 时我们会使用 `createStore` 这个 API 来创建 store。第一个参数放入我们的 `reducer` 或是有多个 `reducers` combine（使用 `combineReducers`）在一起的 `rootRuducers`。第二个参数我们会放入希望预先载入的 `state` 例如：user session 等。第三个参数通常会放入我们想要使用用来增强 Redux 功能的 `middlewares`，若有多个 `middlewares` 的话，通常会使用 `applyMiddleware` 来整合。
+    我们知道在 Redux 中只会有一个 store。在产生 store 时我们会使用 `createStore` 这个 API 来创建 store。第一个参数放入我们的 `reducer` 或是有多个 `reducers` combine（使用 `combineReducers`）在一起的 `rootRuducers`。第二个参数我们会放入希望预先载入的 `state` 例如：user session 等。第三个参数通常会放入我们想要使用用来增强 Redux 功能的 `middlewares`，若有多个 `middlewares` 的话，通常会使用 `applyMiddleware` 来整合。
 
 2. Store
 
-	属于 Store 的四个方法：
+    属于 Store 的四个方法：
 
-	- getState()
-	- dispatch(action)
-	- subscribe(listener)
-	- replaceReducer(nextReducer)
+    - getState()
+    - dispatch(action)
+    - subscribe(listener)
+    - replaceReducer(nextReducer)
 
-	关于 Store 重点是要知道 Redux 只有一个 Sotre 负责存放整个 App 的 State，而唯一能改变 State 的方法只有发送 action。
+    关于 Store 重点是要知道 Redux 只有一个 Sotre 负责存放整个 App 的 State，而唯一能改变 State 的方法只有发送 action。
 
 3. combineReducers：`combineReducers(reducers)`
 
-	combineReducers 可以将多个 reducers 进行整合并回传一个 Function，让我们可以将 reducer 适度分割
+    combineReducers 可以将多个 reducers 进行整合并回传一个 Function，让我们可以将 reducer 适度分割
 
-4. applyMiddleware：`applyMiddleware(...middlewares)`	
+4. applyMiddleware：`applyMiddleware(...middlewares)`    
 
-	官方针对 Middleware 进行说明
-	> It provides a third-party extension point between dispatching an
-	action, and the moment it reaches the reducer.
+    官方针对 Middleware 进行说明
+    > It provides a third-party extension point between dispatching an
+    action, and the moment it reaches the reducer.
 
-	若有 NodeJS 的经验的读者，对于 middleware 概念应该不陌生，让开发者可以在 req 和 res 之间进行一些操作。在 Redux 中 Middleware 则是扮演 action 到达 reducer 前的第三方扩充。而 applyMiddleware 可以将多个 `middlewares` 整合并回传一个 Function，便于使用。
+    若有 NodeJS 的经验的读者，对于 middleware 概念应该不陌生，让开发者可以在 req 和 res 之间进行一些操作。在 Redux 中 Middleware 则是扮演 action 到达 reducer 前的第三方扩充。而 applyMiddleware 可以将多个 `middlewares` 整合并回传一个 Function，便于使用。
 
-	若是你要使用 asynchronous（非同步）的行为的话需要使用其中一种 middleware： [redux-thunk](https://github.com/gaearon/redux-thunk)、[redux-promise](https://github.com/acdlite/redux-promise) 或 [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware) ，这样可以让你在 actions 中 dispatch Promises 而非 function。asynchronous（非同步）运作方式就如同下图所示：
+    若是你要使用 asynchronous（非同步）的行为的话需要使用其中一种 middleware： [redux-thunk](https://github.com/gaearon/redux-thunk)、[redux-promise](https://github.com/acdlite/redux-promise) 或 [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware) ，这样可以让你在 actions 中 dispatch Promises 而非 function。asynchronous（非同步）运作方式就如同下图所示：
 
-	![React Redux](./images/react-redux-diagram.png "React Redux")
+    ![React Redux](./images/react-redux-diagram.png "React Redux")
 
 5. bindActionCreators：`bindActionCreators(actionCreators, dispatch)`
 
-	bindActionCreators 可以将 `actionCreators` 和 `dispatch` 绑定，并回传一个 Function 或 Object，让程序更简洁。但若是使用 react-redux 可以用 `connect` 让 dispatch 行为更容易管理
+    bindActionCreators 可以将 `actionCreators` 和 `dispatch` 绑定，并回传一个 Function 或 Object，让程序更简洁。但若是使用 react-redux 可以用 `connect` 让 dispatch 行为更容易管理
 
 6. compose：`compose(...functions)`
 
-	compose 可以将 function 由右到左合并并回传一个 Function，如官网范例所示：
+    compose 可以将 function 由右到左合并并回传一个 Function，如官网范例所示：
 
-	```
-	import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
-	import thunk from 'redux-thunk'
-	import DevTools from './containers/DevTools'
-	import reducer from '../reducers/index'
+    ```
+    import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+    import thunk from 'redux-thunk'
+    import DevTools from './containers/DevTools'
+    import reducer from '../reducers/index'
 
-	const store = createStore(
-	  reducer,
-	  compose(
-	    applyMiddleware(thunk),
-	    DevTools.instrument()
-	  )
-	)
-	```
+    const store = createStore(
+      reducer,
+      compose(
+        applyMiddleware(thunk),
+        DevTools.instrument()
+      )
+    )
+    ```
 
 ## 总结
 以上介绍了 Redux 的基础概念，若是读者觉得还是有点抽象的话也没关系，在下一个章节我们将实际带大家开发一个整合 `React`、`Redux` 和 `ImmutableJS` 的 TodoApp。
@@ -156,6 +156,6 @@ store.dispatch({ type: 'DECREMENT' });
 （image via [githubusercontent](https://raw.githubusercontent.com/reactjs/redux/master/logo/logo-title-dark.png)、[makeitopen](http://makeitopen.com/static/images/redux_flowchart.png)、[css-tricks](https://css-tricks.com/wp-content/uploads/2016/03/redux-article-3-03.svg)、[tighten](https://blog.tighten.co/assets/img/react-redux-diagram.png)、[tryolabs](http://blog.tryolabs.com/wp-content/uploads/2016/04/redux-simple-f8-diagram.png)、[facebook](https://facebook.github.io/flux/img/flux-simple-f8-diagram-with-client-action-1300w.png)、[JonasOhlsson](http://www.slideshare.net/JonasOhlsson/using-redux)）
 
 ## :door: 任意门
-| [回首页](https://github.com/blueflylin/reactjs101) | [上一章：Flux 基础概念与实战入门](https://github.com/blueflylin/reactjs101/blob/master/Ch07/react-flux-introduction.md) | [下一章：Redux 实战入门](https://github.com/blueflylin/reactjs101/blob/master/Ch07/react-redux-real-world-example.md) |
+| [回首页](https://github.com/aclk/reactjs101) | [上一章：Flux 基础概念与实战入门](https://github.com/aclk/reactjs101/blob/master/Ch07/react-flux-introduction.md) | [下一章：Redux 实战入门](https://github.com/aclk/reactjs101/blob/master/Ch07/react-redux-real-world-example.md) |
 
-| [纠错、提问或许愿](https://github.com/kdchang/reactjs101/issues) |
+| [纠错、提问或许愿](https://github.com/aclk/reactjs101/issues) |

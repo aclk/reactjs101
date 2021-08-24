@@ -14,7 +14,7 @@
 2. 使用 Native Components，更贴近原生使用者体验
 3. 在 JavaScript 和 Native 之间的操作为非同步（Asynchronous）执行，并可用 Chrome 开发者工具除错，支持 `Hot Reloading`
 4. 使用 [Flexbox](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes) 进行排版和布局
-5. 良好的可扩展性（Extensibility），容易整合 Web 生态系标准（XMLHttpRequest、 navigator.geolocation 等）或是原生的组件或函数库（Objective-C、Java 或 Swift）  
+5. 良好的可扩展性（Extensibility），容易整合 Web 生态系标准（XMLHttpRequest、 navigator.geolocation 等）或是原生的组件或函数库（Objective-C、Java 或 Swift）
 6. Facebook 已使用 React Native 于自家 Production App 且将持续维护，另外也有持续蓬勃发展的技术社群
 7. 让 Web 开发者可以使用熟悉的技术切入 Native App 开发
 8. 2015/3 发布 iOS 版本，2015/9 发布 Android 版本
@@ -167,7 +167,7 @@ $ cd ReactNativeFirebaseMotto
 ![用 React Native + Firebase 开发跨平台行动应用程序](./images/folder-2.png)
 
 ### Firebase 简介与设定
-在这个项目中我们会使用到 [Firebase](https://firebase.google.com/) 这个 `Back-End as Service`的服务，也就是说我们不用自己建立后端程序数据库，只要使用 Firebase 所提供的 API 就好像有了一个 NoSQL 数据库一样，当然 Firebase 不单只有提供数据储存的功能，但限于篇幅我们这边将只介绍数据储存的功能。 
+在这个项目中我们会使用到 [Firebase](https://firebase.google.com/) 这个 `Back-End as Service`的服务，也就是说我们不用自己建立后端程序数据库，只要使用 Firebase 所提供的 API 就好像有了一个 NoSQL 数据库一样，当然 Firebase 不单只有提供数据储存的功能，但限于篇幅我们这边将只介绍数据储存的功能。
 
 1. 首先我们进到 Firebase 首页
   ![用 React Native + Firebase 开发跨平台行动应用程序](./images/firebase-landing.png)
@@ -197,7 +197,7 @@ $ cd ReactNativeFirebaseMotto
 
 Firebase 在使用上有许多优点，其中一个使用 Back-End As Service 的好处是你可以专注在应用程序的开发便免花过多时间处理后端基础建设的部份，更可以让 Back-End 共用在不同的 client side 中。此外 Firebase 在和 React 整合上也十分容易，你可以想成 Firebase 负责数据的储存，通过 API 和 React 组件互动，Redux 负责接收管理 client state，若是监听到 Firebase 后端数据更新后同步更新 state 并重新 render 页面。
 
-### 使用 Flexbox 进行 UI 布局设计 
+### 使用 Flexbox 进行 UI 布局设计
 在 React Native 中是使用 `Flexbox` 进行排版，若读者对于 Flexbox 尚不熟悉，建议可以[参考这篇文章](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)，若有需要游戏化的学习工具，也非常推荐这两个教学小游戏：[FlexDefense](http://www.flexboxdefense.com/)、[FLEXBOX FROGGY](http://flexboxfroggy.com/)。
 
 事实上我们可以将 Flexbox 视为一个箱子，最外层是 `flex containers`、内层包的是 `flex items`，在属性上也有分是针对`flex containers` 还是针对是 `flex items` 设计的。在方向性上由左而右是 `main axis`，而上到下是 `cross axis`。
@@ -254,7 +254,7 @@ AppRegistry.registerComponent('ReactNativeFirebaseMotto', () => ReactNativeFireb
 ```javascript
 import React from 'react';
 import ReactNative from 'react-native';
-import { Provider } from 'react-redux'; 
+import { Provider } from 'react-redux';
 import ToolBar from '../ToolBar';
 import MottoListContainer from '../../containers/MottoListContainer';
 import ActionButtonContainer from '../../containers/ActionButtonContainer';
@@ -285,7 +285,7 @@ const Main = () => (
   </Provider>
 );
 
-export default Main; 
+export default Main;
 ```
 
 设定完了基本的布局方式后我们来设定 Actions 和其使用的常数，`src/actions/mottoActions.js`：
@@ -316,7 +316,7 @@ export const UiState = Immutable.fromJS({
 });
 ```
 
-还记得我们提到的 Firebase config 吗？这边我们把相关的设定档放在`src/configs/config.js`中： 
+还记得我们提到的 Firebase config 吗？这边我们把相关的设定档放在`src/configs/config.js`中：
 
 ```javascript
 export const firebaseConfig = {
@@ -364,8 +364,8 @@ export * from './mottoActions';
 
 ```javascript
 import { handleActions } from 'redux-actions';
-// 引入 initialState 
-import { 
+// 引入 initialState
+import {
   MottoState
 } from '../../constants/models';
 
@@ -382,7 +382,7 @@ const mottoReducers = handleActions({
       'mottos',
       payload.mottos
     )
-  ),  
+  ),
   CREATE_MOTTO: (state) => (
     state.set(
       'mottos',
@@ -404,7 +404,7 @@ export default mottoReducers;
 
 ```javascript
 import { handleActions } from 'redux-actions';
-import { 
+import {
   UiState,
 } from '../../constants/models';
 
@@ -419,7 +419,7 @@ const uiReducers = handleActions({
       'isModalVisible',
       !state.get('isModalVisible')
     )
-  ),  
+  ),
 }, UiState);
 
 export default uiReducers;
@@ -471,7 +471,7 @@ const ToolBar = () => (
   </View>
 );
 
-export default ToolBar; 
+export default ToolBar;
 ```
 
 以下是 `src/components/ToolBar/toolBarStyles.js`，将底色设定为黄色，文字置中：
@@ -517,14 +517,14 @@ class MottoList extends Component {
     return (
       <ListItem item={item} onDeleteMotto={this.props.onDeleteMotto} itemsRef={this.props.itemsRef} />
     );
-  }  
+  }
   listenForItems(itemsRef) {
     itemsRef.on('value', (snap) => {
       if(snap.val() === null) {
         this.props.onGetMottos(Immutable.fromJS([]));
       } else {
-        this.props.onGetMottos(Immutable.fromJS(snap.val()));  
-      }     
+        this.props.onGetMottos(Immutable.fromJS(snap.val()));
+      }
     });
   }
   componentDidMount() {
@@ -609,7 +609,7 @@ export default StyleSheet.create({
 import React from 'react';
 import ReactNative from 'react-native';
 import styles from './actionButtonStyles';
-const { View, Text, Modal, TextInput, TouchableHighlight } = ReactNative;  
+const { View, Text, Modal, TextInput, TouchableHighlight } = ReactNative;
 
 const ActionButton = (props) => (
   <TouchableHighlight onPress={props.onToggleModal}>
@@ -663,8 +663,8 @@ const InputModal = (props) => (
         <TextInput
           onChangeText={props.onChangeMottoText}
         />
-        <View style={styles.buttonContainer}>      
-          <TouchableHighlight 
+        <View style={styles.buttonContainer}>
+          <TouchableHighlight
             onPress={props.onToggleModal}
             style={[styles.cancelButton]}
           >
@@ -674,7 +674,7 @@ const InputModal = (props) => (
               Cancel
             </Text>
           </TouchableHighlight>
-          <TouchableHighlight 
+          <TouchableHighlight
             onPress={props.onCreateMotto(props.itemsRef)}
             style={[styles.submitButton]}
           >
@@ -683,7 +683,7 @@ const InputModal = (props) => (
             >
               Submit
             </Text>
-          </TouchableHighlight>  
+          </TouchableHighlight>
         </View>
       </View>
      </View>
@@ -745,7 +745,7 @@ import ActionButton from '../../components/ActionButton';
 import {
   toggleModal,
 } from '../../actions';
- 
+
 export default connect(
   (state) => ({}),
   (dispatch) => ({
@@ -769,7 +769,7 @@ import {
   createMotto,
 } from '../../actions';
 import uuid from 'uuid';
- 
+
 export default connect(
   (state) => ({
     isModalVisible: state.getIn(['ui', 'isModalVisible']),
@@ -893,6 +893,6 @@ $ react-native run-android
 (image via [moduscreate](http://moduscreate.com/wp-content/uploads/2015/07/ReactNativelogo.png)、[css-tricks](https://cdn.css-tricks.com/wp-content/uploads/2011/08/flexbox.png)、[teamtreehouse](http://blog.teamtreehouse.com/wp-content/uploads/2012/12/flexbox-justify.png)、[teamtreehouse](http://blog.teamtreehouse.com/wp-content/uploads/2012/12/flexbox-flex-direction.png)、[css-tricks](https://css-tricks.com/wp-content/uploads/2014/05/align-items.svg)、[css-tricks](https://css-tricks.com/wp-content/uploads/2013/04/justify-content.svg))
 
 ## :door: 任意门
-| [回首页](https://github.com/blueflylin/reactjs101) | [上一章：附录一、React ES5、ES6+ 常见用法对照表](https://github.com/blueflylin/reactjs101/tree/master/Appendix01/README.md) | [下一章：附录三、React 测试入门教学](https://github.com/blueflylin/reactjs101/tree/master/Appendix03/README.md) |
+| [回首页](https://github.com/aclk/reactjs101) | [上一章：附录一、React ES5、ES6+ 常见用法对照表](https://github.com/aclk/reactjs101/tree/master/Appendix01/README.md) | [下一章：附录三、React 测试入门教学](https://github.com/aclk/reactjs101/tree/master/Appendix03/README.md) |
 
-| [纠错、提问或想法](https://github.com/blueflylin/reactjs101/issues) |
+| [纠错、提问或想法](https://github.com/aclk/reactjs101/issues) |
